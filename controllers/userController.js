@@ -7,6 +7,10 @@ exports.guest = function(req, res) {
 exports.register = function(req, res) {
   let user = new User(req.body)
 
-  user.register()
-  res.send('Thanks for attempting to register')
+  user.register().then(function() {
+    res.send('new user created')
+  }).catch(function() {
+    res.send('there was a problem')
+  })
+  
 }
