@@ -15,3 +15,11 @@ exports.register = function(req, res) {
   }
   
 }
+
+exports.login = function(req, res) {
+  res.send('thanks for trying to login')
+}
+
+exports.logout = function(req, res) {
+  res.send('thanks for the logout attempt')
+}
