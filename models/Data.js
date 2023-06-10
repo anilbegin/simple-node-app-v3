@@ -14,6 +14,7 @@ Data.prototype.cleanUp = function() {
   }
 }
 
+/* initial trial to fetch all notes from the DB
 Data.fetchNotes = function() {
   return new Promise(async (resolve, reject) => {
     const itemy = await itemsCollection.find().toArray()
@@ -24,12 +25,30 @@ Data.fetchNotes = function() {
     }
   })
 }
+*/
 
 Data.prototype.createNote = function() {
   return new Promise(async (resolve, reject) => {
     this.cleanUp()
     itemsCollection.insertOne(this.data).then(() => resolve()).catch(() => reject())
     
+  })
+}
+
+Data.findByUserId = function(userId) {
+  return new Promise(async function(resolve, reject) {
+    let posts = await itemsCollection.aggregate([
+      {$match: {userId: userId}},
+      {$sort: {date: -1}}
+    ]).toArray()
+  
+    if(posts.length) {
+    //  console.log(posts)
+      resolve(posts)
+      
+    } else {
+      reject()
+    }
   })
 }
 

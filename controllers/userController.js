@@ -3,12 +3,11 @@ const Data = require('../models/Data')
 
 exports.home = async function(req, res) {
   if(req.session.user) {
-    try {
-      let itemy = await Data.fetchNotes()
-      res.render('notes', {itemy})
-    } catch {
-      res.send('404 template show here')
-    }
+      Data.findByUserId(req.session.user._id).then(function(posts) {
+      res.render('notes', {itemy: posts})
+      }).catch(function() {
+        res.send('404 template')
+      })
    } else {
     res.render('home-guest')
    }
@@ -31,7 +30,9 @@ exports.login = function(req, res) {
   
   user.login().then((result) => {
     req.session.user = {username: user.data.username, _id: user.data._id}
-    res.send(result)
+    req.session.save(function() {
+      res.redirect('/')
+    })
   }).catch((err) => {
     res.send(err)
   })
@@ -42,3 +43,14 @@ exports.logout = function(req, res) {
     res.redirect('/')
   })
 }
+
+/*
+exports.allItemsByUser = function(req, res) {
+  // posts specific to the userId
+  Data.findByUserId(req.session.user._id).then(function(posts) {
+   res.render('notes', {itemy: posts})
+  }).catch(function() {
+    res.send('404 template')
+  })
+}
+*/
