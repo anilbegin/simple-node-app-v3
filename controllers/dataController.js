@@ -1,5 +1,5 @@
 const Data = require('../models/Data')
-const itemsCollection = require('../db').collection('itemx')
+
 
 exports.mynotes = async function(req, res) {
   try {
