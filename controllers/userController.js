@@ -13,10 +13,10 @@ exports.home = async function(req, res) {
    }
 }
 
-exports.register = function(req, res) {
+exports.register = async function(req, res) {
   let user = new User(req.body)
 
-  user.register()
+await user.register()
   if(user.errors.length) {
     res.send(user.errors)
   } else {
