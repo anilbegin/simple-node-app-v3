@@ -1,4 +1,4 @@
-let usersCollection = require('../db').collection('users')
+let usersCollection = require('../db').db().collection('users')
 
 let User = function(data) {
   this.data = data

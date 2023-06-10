@@ -1,4 +1,4 @@
-const itemsCollection = require('../db').collection('itemy')
+const itemsCollection = require('../db').db().collection('itemy')
 
 let Data = function(data) {
   this.data = data
