@@ -41,14 +41,8 @@ Data.findByUserId = function(userId) {
       {$match: {userId: userId}},
       {$sort: {date: -1}}
     ]).toArray()
-  
-    if(posts.length) {
-    //  console.log(posts)
-      resolve(posts)
       
-    } else {
-      reject()
-    }
+   resolve(posts)
   })
 }
 
