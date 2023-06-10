@@ -1,10 +1,10 @@
 const Data = require('../models/Data')
 
 
-exports.mynotes = async function(req, res) {
+exports.myNotes = async function(req, res) {
   try {
-    let itemx = await Data.fetchNotes()
-    res.render('form', {itemx})
+    let itemy = await Data.fetchNotes()
+    res.render('notes', {itemy})
   } catch {
     res.send('404 template show here')
   }

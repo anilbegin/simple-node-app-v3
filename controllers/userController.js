@@ -1,9 +1,15 @@
 const User = require('../models/User')
+const Data = require('../models/Data')
 
-exports.home = function(req, res) {
+exports.home = async function(req, res) {
   //res.render('home-guest')
   if(req.session.user) {
-    res.send("Welcome to the actual app" + req.session.user.username)
+    try {
+      let itemy = await Data.fetchNotes()
+      res.render('notes', {itemy})
+    } catch {
+      res.send('404 template show here')
+    }
    } else {
     res.render('home-guest')
    }

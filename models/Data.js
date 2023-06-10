@@ -14,9 +14,9 @@ Data.prototype.cleanUp = function() {
 
 Data.fetchNotes = function() {
   return new Promise(async (resolve, reject) => {
-    const itemx = await itemsCollection.find().toArray()
-    if(itemx) {
-      resolve(itemx)
+    const itemy = await itemsCollection.find().toArray()
+    if(itemy) {
+      resolve(itemy)
     } else {
       reject()
     }
