@@ -4,13 +4,13 @@ const dataController = require('./controllers/dataController')
 const userController = require('./controllers/userController')
 
 // notes related routes
-router.get('/', dataController.home)
+router.post('/mynotes', dataController.mynotes)
 router.post('/create-item', dataController.createItem)
 router.post('/edit-item', dataController.editItem)
 router.post('/delete-item',dataController.deleteItem)
 
 // user related routes
-router.get('/guest', userController.guest)
+router.get('/', userController.home)
 router.post('/register', userController.register)
 router.post('/login', userController.login)
 router.post('/logout', userController.logout)

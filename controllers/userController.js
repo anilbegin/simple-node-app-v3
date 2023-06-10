@@ -1,6 +1,6 @@
 const User = require('../models/User')
 
-exports.guest = function(req, res) {
+exports.home = function(req, res) {
   //res.render('home-guest')
   if(req.session.user) {
     res.send("Welcome to the actual app" + req.session.user.username)

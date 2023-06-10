@@ -1,7 +1,7 @@
 const Data = require('../models/Data')
 const itemsCollection = require('../db').collection('itemx')
 
-exports.home = async function(req, res) {
+exports.mynotes = async function(req, res) {
   try {
     let itemx = await Data.fetchNotes()
     res.render('form', {itemx})
