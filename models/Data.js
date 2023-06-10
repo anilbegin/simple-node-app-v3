@@ -1,14 +1,16 @@
 const itemsCollection = require('../db').db().collection('itemy')
 
-let Data = function(data) {
+let Data = function(data, userId) {
   this.data = data
   this.errors = []
+  this.userId = userId
 }
 
 Data.prototype.cleanUp = function() {
   this.data = {
     text: this.data,
-    date: new Date()
+    date: new Date(),
+    userId: this.userId
   }
 }
 

@@ -2,7 +2,6 @@ const User = require('../models/User')
 const Data = require('../models/Data')
 
 exports.home = async function(req, res) {
-  //res.render('home-guest')
   if(req.session.user) {
     try {
       let itemy = await Data.fetchNotes()
@@ -31,7 +30,7 @@ exports.login = function(req, res) {
   let user = new User(req.body)
   
   user.login().then((result) => {
-    req.session.user = {favColor: "blue", username: user.data.username}
+    req.session.user = {username: user.data.username, _id: user.data._id}
     res.send(result)
   }).catch((err) => {
     res.send(err)

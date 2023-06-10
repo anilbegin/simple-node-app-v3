@@ -39,7 +39,8 @@ User.prototype.login = function() {
     
     const attemptedUser = await usersCollection.findOne({username: this.data.username})
     if(attemptedUser && this.data.password == attemptedUser.password) {
-      resolve('Congrats')
+      this.data = attemptedUser
+      resolve(attemptedUser)
     } else {
       reject('Invalid username/password')
     }
