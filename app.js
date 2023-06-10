@@ -1,5 +1,16 @@
 const express = require('express')
+const session = require('express-session')
 let app = express()
+
+let sessionOptions = session({
+  secret: "Javascript ZXY notes",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {maxAge: 1000*60*60*24, httpOnly: true}
+})
+
+app.use(sessionOptions)
+
 const router = require('./router')
 
 app.set('view engine', 'ejs')
