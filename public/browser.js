@@ -1,3 +1,22 @@
+let ourForm = document.getElementById('our-form')
+let ourField = document.getElementById('our-field')
+let itemList = document.getElementById('item-list')
+
+function itemTemplate() {
+  return `HEllo from a function`
+}
+
+// creating a new Note/item with browser side Js
+ourForm.addEventListener("submit", e => {
+  e.preventDefault()
+  axios.post('/create-item', {item: ourField.value}).then(function() {
+    itemList.insertAdjacentHTML("afterbegin", itemTemplate())  
+    }).catch(function() {
+        console.log("Please try again later")
+    })
+})
+
+// event listener for Edit & Delete
 document.addEventListener('click', e => {
   
   //Edit/Update feature

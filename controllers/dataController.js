@@ -4,7 +4,8 @@ const Data = require('../models/Data')
 exports.createItem = async function(req, res) {
   let data = new Data(req.body.item, req.session.user._id)
   data.createNote().then(() => {
-    res.redirect('/')
+  //  res.redirect('/') // used during generic form submit
+      res.send("success")
   }).catch(() => {
     res.send('404 template')
   })
