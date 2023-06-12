@@ -1,9 +1,11 @@
 const itemsCollection = require('../db').db().collection('itemy')
+const ObjectId = require("mongodb").ObjectId
 
-let Data = function(data, userId) {
+let Data = function(data, userId, dataId) {
   this.data = data
   this.errors = []
   this.userId = userId
+  this.dataId = dataId
 }
 
 Data.prototype.cleanUp = function() {
@@ -43,6 +45,20 @@ Data.findByUserId = function(userId) {
     ]).toArray()
       
    resolve(posts)
+  })
+}
+
+Data.prototype.editNote = function() {
+  return new Promise(async (resolve, reject) => {
+    this.cleanUp()
+    
+  await itemsCollection.findOneAndUpdate({ _id: new ObjectId(this.dataId), userId: this.data.userId}, {$set: {text: this.data.text, date: this.data.date}}, {returnOriginal:false})
+  .then((result) => {
+    console.log(result)
+    resolve()
+  })
+  .catch(() => reject())
+  
   })
 }
 

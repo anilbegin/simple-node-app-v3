@@ -11,8 +11,12 @@ exports.createItem = async function(req, res) {
 }
 
 exports.editItem = function(req, res) {
-  console.log(req.body.text)
-  res.send('success')
+  let data = new Data(req.body.text, req.session.user._id, req.body.id)
+  data.editNote().then(() => {
+    res.redirect('/')
+  }).catch(() => {
+    res.send('there is a problem')
+  })
 }
 
 exports.deleteItem = function(req, res) {
