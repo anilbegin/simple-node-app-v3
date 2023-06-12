@@ -11,7 +11,8 @@ exports.createItem = async function(req, res) {
 }
 
 exports.editItem = function(req, res) {
-  res.send('this.edit item')
+  console.log(req.body.text)
+  res.send('success')
 }
 
 exports.deleteItem = function(req, res) {
