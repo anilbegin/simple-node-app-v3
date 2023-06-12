@@ -20,5 +20,10 @@ exports.editItem = function(req, res) {
 }
 
 exports.deleteItem = function(req, res) {
-  res.send('this is delete item')
+  let data = new Data(req.body.text, req.session.user._id, req.body.id)
+  data.deleteNote().then(() => {
+    res.redirect('/')
+  }).catch(() => {
+    res.send('there is a problem')
+  })
 }

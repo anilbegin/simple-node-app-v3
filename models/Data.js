@@ -54,8 +54,22 @@ Data.prototype.editNote = function() {
     
   await itemsCollection.findOneAndUpdate({ _id: new ObjectId(this.dataId), userId: this.data.userId}, {$set: {text: this.data.text, date: this.data.date}}, {returnOriginal:false})
   .then((result) => {
-    console.log(result)
-    resolve()
+   // console.log(result)
+    resolve('edit/update success')
+  })
+  .catch(() => reject())
+  
+  })
+}
+
+Data.prototype.deleteNote = function() {
+  return new Promise(async (resolve, reject) => {
+    this.cleanUp()
+    
+  await itemsCollection.deleteOne({ _id: new ObjectId(this.dataId), userId: this.data.userId})
+  .then((result) => {
+   // console.log(result)
+    resolve('delete success')
   })
   .catch(() => reject())
   
