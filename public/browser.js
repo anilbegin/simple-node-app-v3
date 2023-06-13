@@ -23,6 +23,8 @@ ourForm.addEventListener("submit", e => {
   e.preventDefault()
   axios.post('/create-item', {item: ourField.value}).then(function(response) {
     //console.log(response)
+    ourField.value = ""
+    ourField.focus()
     itemList.insertAdjacentHTML("afterbegin", itemTemplate(response.data))  
     }).catch(function() {
         console.log("Please try again later")
