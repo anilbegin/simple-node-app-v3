@@ -31,6 +31,12 @@ ourForm.addEventListener("submit", e => {
     })
 })
 
+// Initial Page Load rendering of list items, via data from JSON.stringify in ejs
+let ourHTML = itemy.map(function(item) {
+  return itemTemplate(item)
+}).join('')
+itemList.insertAdjacentHTML("beforeend", ourHTML)
+
 // event listener for Edit & Delete
 document.addEventListener('click', e => {
   
