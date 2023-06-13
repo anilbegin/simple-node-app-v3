@@ -4,11 +4,15 @@ let itemList = document.getElementById('item-list')
 
 function itemTemplate(item) {
   const date = new Date(item.date)
+  let theHour = date.getHours()
+  theHour = theHour < 10 ? '0' + theHour : theHour 
+  let theMinute = date.getMinutes()
+  theMinute = theMinute < 10 ? '0' + theMinute : theMinute 
   return `
   <li class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
       <div>
         <span class="item-text">${item.text}</span>
-        <div class="font-weight-light"><span class='item-date'>(${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()})</span></div>
+        <div class="font-weight-light"><span class='item-date'>(${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}, ${theHour}:${theMinute})</span></div>
       </div>     
       <div>
               <button data-id=${item._id} class="edit-me btn btn-secondary btn-sm mr-1">Edit</button>
