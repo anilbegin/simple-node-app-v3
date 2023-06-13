@@ -26,7 +26,7 @@ function itemTemplate(item) {
 ourForm.addEventListener("submit", e => {
   e.preventDefault()
   if(ourField.value.trim() != "") {
-    axios.post('/create-item', {item: ourField.value}).then(function(response) {
+    axios.post('/create-item', {item: ourField.value.trim()}).then(function(response) {
       //console.log(response)
       ourField.value = ""
       ourField.focus()
@@ -52,7 +52,7 @@ document.addEventListener('click', e => {
   if(e.target.classList.contains("edit-me")) {
    let userInput = prompt("Enter your desired new text", e.target.parentElement.parentElement.querySelector(".item-text").innerHTML)
    if(userInput) {
-      axios.post('/edit-item', {text: userInput, id: e.target.getAttribute("data-id")}).then(function() {
+      axios.post('/edit-item', {text: userInput.trim(), id: e.target.getAttribute("data-id")}).then(function() {
         
         // displaying the new timestamp for Updated Note, on the fly
         const date = new Date()

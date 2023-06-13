@@ -13,7 +13,7 @@ Data.prototype.cleanUp = function() {
   if(this.data == "") this.errors.push("cannot create a blank note")
 
   this.data = {
-    text: this.data,
+    text: this.data.trim(),
     date: new Date(),
     userId: this.userId
   }
