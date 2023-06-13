@@ -9,6 +9,9 @@ let Data = function(data, userId, dataId) {
 }
 
 Data.prototype.cleanUp = function() {
+  if(typeof(this.data) != "string") this.data = ""
+  if(this.data == "") this.errors.push("cannot create a blank note")
+
   this.data = {
     text: this.data,
     date: new Date(),
@@ -32,7 +35,8 @@ Data.fetchNotes = function() {
 Data.prototype.createNote = function() {
   return new Promise(async (resolve, reject) => {
     this.cleanUp()
-  let result = await itemsCollection.insertOne(this.data)
+    if(!this.errors.length) {
+      let result = await itemsCollection.insertOne(this.data)
     //  console.log(result) 
       response = {
          text: this.data.text, 
@@ -40,6 +44,9 @@ Data.prototype.createNote = function() {
           _id:  result.insertedId
         }
       resolve(response)
+    } else {
+      reject(this.errors)
+    }
   })
 }
 

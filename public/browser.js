@@ -25,14 +25,18 @@ function itemTemplate(item) {
 // creating a new Note/item with browser side Js
 ourForm.addEventListener("submit", e => {
   e.preventDefault()
-  axios.post('/create-item', {item: ourField.value}).then(function(response) {
-    //console.log(response)
-    ourField.value = ""
+  if(ourField.value.trim() != "") {
+    axios.post('/create-item', {item: ourField.value}).then(function(response) {
+      //console.log(response)
+      ourField.value = ""
+      ourField.focus()
+      itemList.insertAdjacentHTML("afterbegin", itemTemplate(response.data))  
+      }).catch(function(err) {
+          console.log(err)
+      })
+  } else {
     ourField.focus()
-    itemList.insertAdjacentHTML("afterbegin", itemTemplate(response.data))  
-    }).catch(function() {
-        console.log("Please try again later")
-    })
+  }
 })
 
 // Initial Page Load rendering of list items, via data from JSON.stringify in ejs
