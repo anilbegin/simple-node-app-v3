@@ -2,15 +2,28 @@ let ourForm = document.getElementById('our-form')
 let ourField = document.getElementById('our-field')
 let itemList = document.getElementById('item-list')
 
-function itemTemplate() {
-  return `HEllo from a function`
+function itemTemplate(item) {
+  const date = new Date(item.date)
+  return `
+  <li class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+      <div>
+        <span class="item-text">${item.text}</span>
+        <div class="font-weight-light"><span class='item-date'>(${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()})</span></div>
+      </div>     
+      <div>
+              <button data-id=${item._id} class="edit-me btn btn-secondary btn-sm mr-1">Edit</button>
+              <button data-id=${item._id} class="delete-me btn btn-danger btn-sm">Delete</button>
+      </div>
+  </li>
+  `
 }
 
 // creating a new Note/item with browser side Js
 ourForm.addEventListener("submit", e => {
   e.preventDefault()
-  axios.post('/create-item', {item: ourField.value}).then(function() {
-    itemList.insertAdjacentHTML("afterbegin", itemTemplate())  
+  axios.post('/create-item', {item: ourField.value}).then(function(response) {
+    //console.log(response)
+    itemList.insertAdjacentHTML("afterbegin", itemTemplate(response.data))  
     }).catch(function() {
         console.log("Please try again later")
     })

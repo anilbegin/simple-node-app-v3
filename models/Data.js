@@ -32,8 +32,14 @@ Data.fetchNotes = function() {
 Data.prototype.createNote = function() {
   return new Promise(async (resolve, reject) => {
     this.cleanUp()
-    itemsCollection.insertOne(this.data).then(() => resolve()).catch(() => reject())
-    
+  let result = await itemsCollection.insertOne(this.data)
+    //  console.log(result) 
+      response = {
+         text: this.data.text, 
+         date:  this.data.date, 
+          _id:  result.insertedId
+        }
+      resolve(response)
   })
 }
 
