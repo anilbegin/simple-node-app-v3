@@ -94,8 +94,6 @@ Data.findByUserId = function(userId) {
   })
 }
 
-// end of trial seciton
-
 Data.prototype.editNote = function() {
   return new Promise(async (resolve, reject) => {
     this.cleanUp()
