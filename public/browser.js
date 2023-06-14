@@ -52,16 +52,16 @@ document.addEventListener('click', e => {
   if(e.target.classList.contains("edit-me")) {
    let userInput = prompt("Enter your desired new text", e.target.parentElement.parentElement.querySelector(".item-text").innerHTML)
    if(userInput) {
-      axios.post('/edit-item', {text: userInput.trim(), id: e.target.getAttribute("data-id")}).then(function() {
+      axios.post('/edit-item', {text: userInput.trim(), id: e.target.getAttribute("data-id")}).then(function(item) {
         
         // displaying the new timestamp for Updated Note, on the fly
-        const date = new Date()
+        const date = new Date(item.data.date)
         let theMinute = date.getMinutes()
         theMinute = theMinute < 10 ? '0' + theMinute : theMinute 
         let theDate = '(' + date.getDate() + '/' + `${date.getMonth() + 1}` + '/' + date.getFullYear() + ', ' + date.getHours() + ':' + theMinute + ')'
 
         e.target.parentElement.parentElement.querySelector(".item-date").innerHTML = theDate
-        e.target.parentElement.parentElement.querySelector(".item-text").innerHTML = userInput
+        e.target.parentElement.parentElement.querySelector(".item-text").innerHTML = item.data.text
     }).catch(function() {
         console.log("Please try again later")
     })

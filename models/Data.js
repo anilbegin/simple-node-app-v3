@@ -65,10 +65,11 @@ Data.prototype.editNote = function() {
   return new Promise(async (resolve, reject) => {
     this.cleanUp()
     
-  await itemsCollection.findOneAndUpdate({ _id: new ObjectId(this.dataId), userId: this.data.userId}, {$set: {text: this.data.text, date: this.data.date}}, {returnOriginal:false})
+  await itemsCollection.findOneAndUpdate({ _id: new ObjectId(this.dataId), userId: this.data.userId}, {$set: {text: this.data.text, date: this.data.date}}, {returnDocument: 'after'})
   .then((result) => {
-   // console.log(result)
-    resolve('edit/update success')
+  // console.log(result)
+    
+    resolve(result.value)
   })
   .catch(() => reject())
   
