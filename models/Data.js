@@ -68,7 +68,11 @@ Data.findByUserId = function(userId) {
     let items = await itemsCollection.aggregate([
       {$match: {userId: new ObjectId(userId)}},
       {$lookup: {from: "users", localField: "userId", foreignField: "_id", as: "userRecords"}},
-      
+      {$project: {
+        text: 1,
+        date: 1,
+        username: {$arrayElemAt: ["$userRecords", 0]} 
+      }}
     ]).toArray()
 
     if(items.length) {
