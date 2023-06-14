@@ -49,7 +49,8 @@ Data.prototype.createNote = function() {
     }
   })
 }
-/*
+
+/* // find all notes - for a particular userId
 Data.findByUserId = function(userId) {
   return new Promise(async function(resolve, reject) {
     let posts = await itemsCollection.aggregate([
@@ -61,8 +62,9 @@ Data.findByUserId = function(userId) {
   })
 }
 */
-// trial section // extract username from one table and posts from other table, only thing provided is UserId
 
+// find all records for a userId, also find the respective username from another collection.
+//  extract username from one table and posts from other table, only thing provided is UserId
 Data.findByUserId = function(userId) {
   return new Promise(async function(resolve, reject) {
     let items = await itemsCollection.aggregate([
@@ -84,10 +86,10 @@ Data.findByUserId = function(userId) {
     })
 
     if(items.length) {
-      console.log(items[0])
+    //  console.log(items)
       resolve(items)
     } else {
-      reject()
+      reject('there was some problem')
     }
   })
 }

@@ -12,16 +12,18 @@
   
   
   <div class="container">
+    
     <form action="/logout" method="POST">
       <span><button class="btn" style="float: right;"><i title="logout" class="fas fa-sign-out-alt" style="margin-top: 10px;color: red;"></i></button></span>
     </form>
-    <h1 class="display-4 text-center py-1">Short-Note</h1>
     
+    <h1 class="display-4 text-center py-1">Short-Note</h1>
+    <span class="text-left">hello, <%= itemy[0].userinfo.username %></span>
     <div class="jumbotron p-3 shadow-sm">
       <form id="our-form" action="/create-item" method="POST">
         <div class="d-flex align-items-center">
-          <input id="our-field" autofocus autocomplete="off" name="item" class="form-control mr-3" type="text" style="flex: 1;">
-          <button class="btn btn-primary">Add New Note</button>
+          <input id="our-field" autofocus autocomplete="off" name="item" class="form-control mr-3" type="text" style="flex: 1;" placeholder="enter something here..">
+          <button class="btn btn-primary">Add Note</button>
         </div>
       </form>
     </div>
@@ -34,6 +36,7 @@
   <script>
     let itemy = <%- JSON.stringify(itemy) %>
   </script>
+  
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
   <script src="/browser.js"></script>
 </body>
