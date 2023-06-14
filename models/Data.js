@@ -71,9 +71,17 @@ Data.findByUserId = function(userId) {
       {$project: {
         text: 1,
         date: 1,
-        username: {$arrayElemAt: ["$userRecords", 0]} 
+        userinfo: {$arrayElemAt: ["$userRecords", 0]} 
       }}
     ]).toArray()
+
+    // clean up username {} property for each note
+    items.map(function(item) {
+      item.userinfo = {
+        username: item.userinfo.username
+      }
+      return item
+    })
 
     if(items.length) {
       console.log(items[0])
