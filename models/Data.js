@@ -15,7 +15,7 @@ Data.prototype.cleanUp = function() {
   this.data = {
     text: this.data.trim(),
     date: new Date(),
-    userId: this.userId
+    userId: ObjectId(this.userId)
   }
 }
 
@@ -53,13 +53,34 @@ Data.prototype.createNote = function() {
 Data.findByUserId = function(userId) {
   return new Promise(async function(resolve, reject) {
     let posts = await itemsCollection.aggregate([
-      {$match: {userId: userId}},
+      {$match: {userId: new ObjectId(userId)}},
       {$sort: {date: -1}}
     ]).toArray()
-      
+  //   console.log(posts) 
    resolve(posts)
   })
 }
+
+// trial section // extract username from one table and posts from other table, only thing provided is UserId
+/*
+Data.findByUserId = function(userId) {
+  return new Promise(async function(resolve, reject) {
+    let items = await itemsCollection.aggregate([
+      {$match: {userId: userId}},
+      {$lookup: {from: "users", localField: "userId", foreignField: "_id", as: "userRecords"}},
+      
+    ]).toArray()
+
+    if(items.length) {
+      console.log(items)
+      resolve(items)
+    } else {
+      reject()
+    }
+  })
+}
+*/
+// end of trial seciton
 
 Data.prototype.editNote = function() {
   return new Promise(async (resolve, reject) => {
@@ -91,3 +112,5 @@ Data.prototype.deleteNote = function() {
 }
 
 module.exports = Data
+
+
