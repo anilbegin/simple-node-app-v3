@@ -9,7 +9,7 @@ exports.home = async function(req, res) {
         res.send('404 template')
       })
    } else {
-    res.render('home-guest')
+    res.render('home-guest', {errors: req.flash('errors')})
    }
 }
 
@@ -34,7 +34,12 @@ exports.login = function(req, res) {
       res.redirect('/')
     })
   }).catch((err) => {
-    res.send(err)
+    // res.send(err)
+    req.flash('errors', err) // req.session.flash.errors = []
+    req.session.save(function() {
+      res.redirect('/')
+    })
+    
   })
 }
 
