@@ -49,7 +49,7 @@ Data.prototype.createNote = function() {
     }
   })
 }
-
+/*
 Data.findByUserId = function(userId) {
   return new Promise(async function(resolve, reject) {
     let posts = await itemsCollection.aggregate([
@@ -60,26 +60,26 @@ Data.findByUserId = function(userId) {
    resolve(posts)
   })
 }
-
+*/
 // trial section // extract username from one table and posts from other table, only thing provided is UserId
-/*
+
 Data.findByUserId = function(userId) {
   return new Promise(async function(resolve, reject) {
     let items = await itemsCollection.aggregate([
-      {$match: {userId: userId}},
+      {$match: {userId: new ObjectId(userId)}},
       {$lookup: {from: "users", localField: "userId", foreignField: "_id", as: "userRecords"}},
       
     ]).toArray()
 
     if(items.length) {
-      console.log(items)
+      console.log(items[0])
       resolve(items)
     } else {
       reject()
     }
   })
 }
-*/
+
 // end of trial seciton
 
 Data.prototype.editNote = function() {
