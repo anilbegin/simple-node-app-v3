@@ -18,9 +18,12 @@ exports.register = async function(req, res) {
 
 await user.register()
   if(user.errors.length) {
-    res.send(user.errors)
+    let errors = Object.assign({}, ...user.errors)
+    // console.log(errors)
+    res.json(errors)
   } else {
-    res.send('thanks for trying to register')
+   // res.send('thanks for trying to register')
+   res.json("Success")
   }
   
 }

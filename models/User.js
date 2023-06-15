@@ -20,9 +20,9 @@ User.prototype.cleanUp = function() {
 }
 
 User.prototype.validate = async function() {
-  if(this.data.username == "") this.errors.push("Username cannot be blank")
-  if(this.data.email == "") this.errors.push("Email cannot be blank")
-  if(this.data.password == "") this.errors.push("Password cannot be blank")
+  if(this.data.username == "") this.errors.push({"username":"Username cannot be blank"})
+  if(this.data.email == "") this.errors.push({"email":"Email cannot be blank"})
+  if(this.data.password == "") this.errors.push({"password":"Password cannot be blank"})
 
   if(this.data.username.length > 0 && this.data.username.length < 3) {this.errors.push('Username must be atleast 3 characters')}
   if(this.data.username.length > 30) {this.errors.push("Username cannot exceed 30 characters")}
