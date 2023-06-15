@@ -11,7 +11,7 @@ const regPassword = document.getElementById('reg-password')
 
 // LOGIN SECTION
 // display Error message for invalid login
-function errorTemplate() {
+function loginErrorTemplate() {
   if(document.getElementById('error')) document.getElementById('error').remove()
   return `<span id='error' class="mr-2 text-danger">Invalid username/password</span>`
 }
@@ -20,7 +20,7 @@ function errorTemplate() {
 ourForm.addEventListener('submit', e => {
   e.preventDefault()
   if(username.value == "" || password.value == "") {
-    ourForm.insertAdjacentHTML('beforebegin', errorTemplate())
+    ourForm.insertAdjacentHTML('beforebegin', loginErrorTemplate())
   }
    
   if(username.value.trim() != "" && password != "") {
@@ -29,7 +29,7 @@ ourForm.addEventListener('submit', e => {
       if(response.data == "Success") {
         window.location.href = '/'
       } else {
-        ourForm.insertAdjacentHTML('beforebegin', errorTemplate())
+        ourForm.insertAdjacentHTML('beforebegin', loginErrorTemplate())
       }
     }).catch(function() {
       console.log("Please try again later.")
