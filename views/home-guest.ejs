@@ -14,13 +14,13 @@
   <header class="jumbotron jumbo mb-3">
     <div class="container d-flex flex-column flex-md-row align-items-center p-2">
       <h4 class="my-0 mr-md-auto font-weight-normal"><i class="fas fa-tasks" style="color:rgb(166, 165, 165)"></i></h4>
-      <form action="/login" method="POST" class="mb-0 pt-2 pt-md-0">
+      <form id="our-form" action="/login" method="POST" class="mb-0 pt-2 pt-md-0">
         <div class="row align-items-center">
           <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
-            <input name="username" class="form-control form-control-sm" type="text" placeholder="Username" autocomplete="off">
+            <input id="username-field" name="username" class="form-control form-control-sm" type="text" placeholder="Username" autocomplete="off">
           </div>
           <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
-            <input name="password" class="form-control form-control-sm" type="password" placeholder="Password">
+            <input id="password-field" name="password" class="form-control form-control-sm" type="password" placeholder="Password">
           </div>
           <div class="col-md-auto">
             <button class="btn btn-primary btn-sm">Login</button>
@@ -67,6 +67,7 @@
     </div>
   </div>
   
-
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+  <script src="/home-guest.js"></script>
 </body>
 </html>

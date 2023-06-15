@@ -68,9 +68,9 @@ User.prototype.login = function() {
         username: attemptedUser.username 
       } 
       
-      resolve("Congrats")
+      resolve("Success")
     } else {
-      reject('Invalid username/password')
+      reject('Fail')
     }
   })
 }

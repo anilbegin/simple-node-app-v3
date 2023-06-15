@@ -31,15 +31,20 @@ exports.login = function(req, res) {
   user.login().then((result) => {
     req.session.user = {username: user.data.username, _id: user.data._id}
     req.session.save(function() {
-      res.redirect('/')
+      res.json(result)
+     // res.redirect('/')  // this is for back-end login execution
     })
   }).catch((err) => {
     // res.send(err)
+    // back-send attaching errors to req.session.flash..
+    /*
     req.flash('errors', err) // req.session.flash.errors = []
     req.session.save(function() {
       res.redirect('/')
     })
-    
+    */
+    // end of backend section setting n send req.session.flash
+    res.json(err)
   })
 }
 
