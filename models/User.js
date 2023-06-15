@@ -30,7 +30,9 @@ User.prototype.validate = async function() {
   if(this.data.password.length > 30) {this.errors.push("Password cannot exceed 30 characters")}
 
   if(this.data.username != "" && !validator.isAlphanumeric(this.data.username))  {this.errors.push('Username can only contain letters and numbers')}
-  if(!validator.isEmail(this.data.email)) {this.errors.push("You must provide a valid email address.")}
+  if(this.data.email != "") {
+    if(!validator.isEmail(this.data.email)) {this.errors.push("You must provide a valid email address.")}
+  }
 
   // Only if username is valid then check to see if its already taken
   if(this.data.username.length > 2 && this.data.username.length < 31 && validator.isAlphanumeric(this.data.username)) {
