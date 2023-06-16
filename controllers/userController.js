@@ -9,7 +9,8 @@ exports.home = async function(req, res) {
         res.send('404 template')
       })
    } else {
-    res.render('home-guest', {errors: req.flash('errors')})
+   // res.render('home-guest', {errors: req.flash('errors')}) // can be used for flash error for login
+   res.render('home-guest', {regErrors: req.flash('regErrors')})
    }
 }
 
@@ -18,12 +19,16 @@ exports.register = async function(req, res) {
 
 await user.register()
   if(user.errors.length) {
-    let errors = Object.assign({}, ...user.errors)
-    // console.log(errors)
-    res.json(errors)
+    //res.send(user.errors)
+    user.errors.forEach(function(error) {
+      req.flash('regErrors', error) // flash is going to adjust session data in db
+    })
+    req.session.save(function() {
+      res.redirect('/')
+    })
   } else {
-   // res.send('thanks for trying to register')
-   res.json("Success")
+    res.send('thanks for trying to register')
+   //res.json("Success") // could be used for Front-end Js later
   }
   
 }
