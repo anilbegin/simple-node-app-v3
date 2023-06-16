@@ -88,6 +88,8 @@ Data.findByUserId = function(userId) {
     if(items.length) {
     //  console.log(items)
       resolve(items)
+    } else if(items.length == 0) {
+      resolve(items)      
     } else {
       reject('there was some problem')
     }

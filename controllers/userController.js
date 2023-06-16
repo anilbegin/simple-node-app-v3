@@ -4,7 +4,7 @@ const Data = require('../models/Data')
 exports.home = async function(req, res) {
   if(req.session.user) {
       Data.findByUserId(req.session.user._id).then(function(posts) {
-      res.render('notes', {itemy: posts})
+      res.render('notes', {itemy: posts, username: req.session.user.username})
       }).catch(function() {
         res.send('404 template')
       })
@@ -17,19 +17,19 @@ exports.home = async function(req, res) {
 exports.register = async function(req, res) {
   let user = new User(req.body)
 
-await user.register()
-  if(user.errors.length) {
-    //res.send(user.errors)
-    user.errors.forEach(function(error) {
-      req.flash('regErrors', error) // flash is going to adjust session data in db
-    })
-    req.session.save(function() {
-      res.redirect('/')
-    })
-  } else {
-    res.send('thanks for trying to register')
-   //res.json("Success") // could be used for Front-end Js later
-  }
+user.register().then(() => {
+  req.session.user = {username: user.data.username, _id: user.data._id}
+  req.session.save(function() {
+    res.redirect('/')
+  })
+}).catch((regErr) => {
+  regErr.forEach(function(error) {
+    req.flash('regErrors', error) // flash is going to adjust session data in db
+  })
+  req.session.save(function() {
+    res.redirect('/')
+  })
+})
   
 }
 
