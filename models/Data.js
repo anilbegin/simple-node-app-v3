@@ -69,6 +69,7 @@ Data.findByUserId = function(userId) {
   return new Promise(async function(resolve, reject) {
     let items = await itemsCollection.aggregate([
       {$match: {userId: new ObjectId(userId)}},
+      {$sort: {date: -1}},
       {$lookup: {from: "users", localField: "userId", foreignField: "_id", as: "userRecords"}},
       {$project: {
         text: 1,
