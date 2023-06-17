@@ -14,7 +14,7 @@ function itemTemplate(item) {
         <span class="item-text">${item.text}</span>
         <div class="font-weight-light"><span class='item-date'>(${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}, ${theHour}:${theMinute})</span></div>
       </div>     
-      <div>   
+      <div class="d-flex no-wrap">   
               <button data-id=${item._id} class="edit-me btn btn-secondary btn-sm mr-1">Edit</button>
               <button data-id=${item._id} class="delete-me btn btn-danger btn-sm">Delete</button>
       </div>
