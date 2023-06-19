@@ -31,3 +31,27 @@ ourForm.addEventListener('submit', e => {
   }
 })
 
+// REGISTER SECTION
+let allFields = document.querySelectorAll("#registration-form .form-control")
+let regUsername = document.querySelector("#username-register") 
+regUsername.previousValue = ""
+
+function insertValidationElements() {
+  allFields.forEach(function(el) {
+    el.insertAdjacentHTML('afterend', '<div class="alert alert-danger small liveValidateMessage"></div>')
+  })
+}
+insertValidationElements()
+
+function usernameHandler() {
+  if(regUsername.previousValue != regUsername.value) {
+    alert("Username handler just ran")
+  }
+  regUsername.previousValue = regUsername.value
+  
+}
+
+regUsername.addEventListener("keyup", () => {
+  usernameHandler()
+})
+
