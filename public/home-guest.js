@@ -114,7 +114,20 @@ function emailAfterDelay() {
   }
   if(!regEmail.errors) {
     hideValidationError(regEmail)
+
+    axios.post('/doesEmailExist', {email: regEmail.value}).then((response) => {
+      if(response.data) {
+        regEmail.isUnique = false
+        showValidationError(regEmail, "this email is already in use")
+      } else {
+        regEmail.isUnique = true
+        hideValidationError(regEmail)
+      }
+    }).catch(() => {
+      console.log("try again later")
+    })
    }
+ 
 }
 
 regUsername.addEventListener("keyup", () => {

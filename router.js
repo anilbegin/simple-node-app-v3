@@ -15,5 +15,6 @@ router.post('/login', userController.login)
 router.post('/logout', userController.logout)
 //router.get('/allItemsByUser', userController.allItemsByUser)
 router.post('/doesUsernameExist', userController.doesUsernameExist)
+router.post('/doesEmailExist', userController.doesEmailExist)
 
 module.exports = router
