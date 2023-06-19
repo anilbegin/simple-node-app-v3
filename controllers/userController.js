@@ -74,7 +74,7 @@ exports.allItemsByUser = function(req, res) {
 */
 
 exports.doesUsernameExist = function(req, res) {
-  User.findByUsername(req.body.username).then(function() {
+  User.findByUsername(req.body.username.toLowerCase()).then(function() {
     res.json(true)
   }).catch(function() {
     res.json(false)
@@ -83,6 +83,6 @@ exports.doesUsernameExist = function(req, res) {
 }
 
 exports.doesEmailExist = async function(req, res) {
- let emailBool = await User.doesEmailExist(req.body.email)
+ let emailBool = await User.doesEmailExist(req.body.email.toLowerCase())
  res.json(emailBool)
 }
