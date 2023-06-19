@@ -55,9 +55,14 @@ function usernameHandler() {
 
 function usernameImmediately() {
  if(regUsername.value != "" && !/^([a-zA-Z0-9]+)$/.test(regUsername.value)) {
-  alert("Username can only contain letters and numbers")
+  showValidationError(regUsername, "Username can only contain letters and numbers")
  }
 }
+function showValidationError(el, message) {
+  el.nextElementSibling.innerHTML = message
+  el.nextElementSibling.classList.add("liveValidateMessage--visible")
+}
+
 function usernameAfterDelay() {
   
 }
