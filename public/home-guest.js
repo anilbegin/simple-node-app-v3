@@ -44,6 +44,7 @@ function insertValidationElements() {
 insertValidationElements()
 
 function usernameHandler() {
+  regUsername.errors = false
   if(regUsername.previousValue != regUsername.value) {
     usernameImmediately()
     clearTimeout(regUsername.timer)
@@ -57,10 +58,19 @@ function usernameImmediately() {
  if(regUsername.value != "" && !/^([a-zA-Z0-9]+)$/.test(regUsername.value)) {
   showValidationError(regUsername, "Username can only contain letters and numbers")
  }
+ if(!regUsername.errors) {
+  hideValidationError(regUsername)
+ }
 }
+
+// here 'el' is whatever Element is being passed
 function showValidationError(el, message) {
   el.nextElementSibling.innerHTML = message
   el.nextElementSibling.classList.add("liveValidateMessage--visible")
+  el.errors = true
+}
+function hideValidationError(el) {
+  el.nextElementSibling.classList.remove("liveValidateMessage--visible")
 }
 
 function usernameAfterDelay() {
