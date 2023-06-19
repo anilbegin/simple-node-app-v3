@@ -36,6 +36,7 @@ let allFields = document.querySelectorAll("#registration-form .form-control")
 let regUsername = document.querySelector("#username-register") 
 regUsername.previousValue = ""
 
+
 function insertValidationElements() {
   allFields.forEach(function(el) {
     el.insertAdjacentHTML('afterend', '<div class="alert alert-danger small liveValidateMessage"></div>')
@@ -80,9 +81,25 @@ function usernameAfterDelay() {
   if(regUsername.value.length < 3) {
     showValidationError(regUsername, "username must be atleast 3 characters")
   }
+
+  if(!regUsername.errors) {
+    axios.post('/doesUsernameExist', {username: regUsername.value}).then((response) => {
+      if(response.data) {
+        showValidationError(regUsername, "username is already taken")
+        regUsername.isUnique = false
+      } else {
+        regUsername.isUnique = true
+      }
+    }).catch(() => {
+      console.log("try again later")
+    })
+  }
+  
 }
 
 regUsername.addEventListener("keyup", () => {
   usernameHandler()
 })
+
+
 

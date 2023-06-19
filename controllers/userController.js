@@ -72,3 +72,12 @@ exports.allItemsByUser = function(req, res) {
   })
 }
 */
+
+exports.doesUsernameExist = function(req, res) {
+  User.findByUsername(req.body.username).then(function() {
+    res.json(true)
+  }).catch(function() {
+    res.json(false)
+  })
+ 
+}
