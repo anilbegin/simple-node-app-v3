@@ -33,8 +33,10 @@ ourForm.addEventListener('submit', e => {
 
 // REGISTER SECTION
 let allFields = document.querySelectorAll("#registration-form .form-control")
-let regUsername = document.querySelector("#username-register") 
+const regUsername = document.querySelector("#username-register") 
 regUsername.previousValue = ""
+const regEmail = document.querySelector("#email-register")
+regEmail.previousValue = ""
 
 
 function insertValidationElements() {
@@ -49,11 +51,20 @@ function usernameHandler() {
   if(regUsername.previousValue != regUsername.value) {
     usernameImmediately()
     clearTimeout(regUsername.timer)
-    regUsername.timer = setTimeout(() => usernameAfterDelay(), 3000)
+    regUsername.timer = setTimeout(() => usernameAfterDelay(), 800)
   }
   regUsername.previousValue = regUsername.value
   
 }
+function emailHandler() {
+  regEmail.errors = false
+  if(regEmail.previousValue != regEmail.value) {
+    clearTimeout(regEmail.timer)
+    regEmail.timer = setTimeout(() => emailAfterDelay(), 800)
+  }
+  regEmail.previousValue = regEmail.value
+}
+
 
 function usernameImmediately() {
  if(regUsername.value != "" && !/^([a-zA-Z0-9]+)$/.test(regUsername.value)) {
@@ -97,8 +108,21 @@ function usernameAfterDelay() {
   
 }
 
+function emailAfterDelay() {
+  if(!/^[a-zA-Z0-9]+\.?[a-zA-Z0-9]+@(yahoo|ymail|rocketmail|gmail|rediffmail|outlook|live|hotmail)\.com$/.test(regEmail.value)) {
+    showValidationError(regEmail, "please provide a valid email address")
+  }
+  if(!regEmail.errors) {
+    hideValidationError(regEmail)
+   }
+}
+
 regUsername.addEventListener("keyup", () => {
   usernameHandler()
+})
+
+regEmail.addEventListener("keyup", () => {
+  emailHandler()
 })
 
 
