@@ -54,10 +54,12 @@ function usernameHandler() {
 }
 
 function usernameImmediately() {
- console.log("Immediate method just ran")
+ if(regUsername.value != "" && !/^([a-zA-Z0-9]+)$/.test(regUsername.value)) {
+  alert("Username can only contain letters and numbers")
+ }
 }
 function usernameAfterDelay() {
-  alert("Afetr delay method finally rn")
+  
 }
 
 regUsername.addEventListener("keyup", () => {
