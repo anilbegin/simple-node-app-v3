@@ -56,7 +56,10 @@ function usernameHandler() {
 
 function usernameImmediately() {
  if(regUsername.value != "" && !/^([a-zA-Z0-9]+)$/.test(regUsername.value)) {
-  showValidationError(regUsername, "Username can only contain letters and numbers")
+  showValidationError(regUsername, "username can only contain letters and numbers")
+ }
+ if(regUsername.value.length > 30) {
+  showValidationError(regUsername, "username cannot exceed 30 characters")
  }
  if(!regUsername.errors) {
   hideValidationError(regUsername)
@@ -74,7 +77,9 @@ function hideValidationError(el) {
 }
 
 function usernameAfterDelay() {
-  
+  if(regUsername.value.length < 3) {
+    showValidationError(regUsername, "username must be atleast 3 characters")
+  }
 }
 
 regUsername.addEventListener("keyup", () => {
