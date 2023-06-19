@@ -192,6 +192,18 @@ regPassword.addEventListener("keyup", () => {
   passwordHandler()
 })
 
+regUsername.addEventListener("blur", () => {
+  usernameHandler()
+})
+
+regEmail.addEventListener("blur", () => {
+  emailHandler()
+})
+
+regPassword.addEventListener("blur", () => {
+  passwordHandler()
+})
+
 regForm.addEventListener("submit", e => {
   e.preventDefault()
   formSubmitHandler()
