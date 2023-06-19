@@ -32,12 +32,15 @@ ourForm.addEventListener('submit', e => {
 })
 
 // REGISTER SECTION
+const regForm = document.querySelector("#registration-form")
 let allFields = document.querySelectorAll("#registration-form .form-control")
 const regUsername = document.querySelector("#username-register") 
 regUsername.previousValue = ""
 const regEmail = document.querySelector("#email-register")
 regEmail.previousValue = ""
 const regPassword = document.querySelector("#password-register")
+regUsername.isUnique = false
+regEmail.isUnique = false
 
 
 function insertValidationElements() {
@@ -158,6 +161,25 @@ function emailAfterDelay() {
  
 }
 
+function formSubmitHandler() {
+  usernameImmediately()
+  usernameAfterDelay()
+  emailAfterDelay()
+  passwordImmediately()
+  passwordAfterDelay()
+
+  if(
+    regUsername.isUnique &&
+     !regUsername.errors &&
+      regEmail.isUnique &&
+      !regEmail.errors &&
+      !regPassword.errors
+      ) 
+      {
+        regForm.submit()
+      }
+}
+
 regUsername.addEventListener("keyup", () => {
   usernameHandler()
 })
@@ -168,6 +190,11 @@ regEmail.addEventListener("keyup", () => {
 
 regPassword.addEventListener("keyup", () => {
   passwordHandler()
+})
+
+regForm.addEventListener("submit", e => {
+  e.preventDefault()
+  formSubmitHandler()
 })
 
 
