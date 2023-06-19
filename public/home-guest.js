@@ -45,10 +45,19 @@ insertValidationElements()
 
 function usernameHandler() {
   if(regUsername.previousValue != regUsername.value) {
-    alert("Username handler just ran")
+    usernameImmediately()
+    clearTimeout(regUsername.timer)
+    regUsername.timer = setTimeout(() => usernameAfterDelay(), 3000)
   }
   regUsername.previousValue = regUsername.value
   
+}
+
+function usernameImmediately() {
+ console.log("Immediate method just ran")
+}
+function usernameAfterDelay() {
+  alert("Afetr delay method finally rn")
 }
 
 regUsername.addEventListener("keyup", () => {
