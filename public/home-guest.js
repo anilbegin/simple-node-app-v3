@@ -37,6 +37,7 @@ const regUsername = document.querySelector("#username-register")
 regUsername.previousValue = ""
 const regEmail = document.querySelector("#email-register")
 regEmail.previousValue = ""
+const regPassword = document.querySelector("#password-register")
 
 
 function insertValidationElements() {
@@ -56,6 +57,7 @@ function usernameHandler() {
   regUsername.previousValue = regUsername.value
   
 }
+
 function emailHandler() {
   regEmail.errors = false
   if(regEmail.previousValue != regEmail.value) {
@@ -63,6 +65,32 @@ function emailHandler() {
     regEmail.timer = setTimeout(() => emailAfterDelay(), 800)
   }
   regEmail.previousValue = regEmail.value
+}
+
+function passwordHandler() {
+  regPassword.errors = false
+  if(regPassword.previousValue != regPassword.value) {
+    passwordImmediately()
+    clearTimeout(regPassword.timer)
+    regPassword.timer = setTimeout(() => passwordAfterDelay(), 800)
+  }
+  regPassword.previousValue = regPassword.value
+  
+}
+
+function passwordImmediately() {
+  if(regPassword.value.length > 30) {
+    showValidationError(regPassword, "password cannot exceed 30 characters")
+  }
+  if(!regPassword.errors) {
+    hideValidationError(regPassword)
+  }
+}
+
+function passwordAfterDelay() {
+  if(regPassword.value.length < 6) {
+    showValidationError(regPassword, "password must be atleast 6 characters")
+  }
 }
 
 
@@ -138,5 +166,8 @@ regEmail.addEventListener("keyup", () => {
   emailHandler()
 })
 
+regPassword.addEventListener("keyup", () => {
+  passwordHandler()
+})
 
 
