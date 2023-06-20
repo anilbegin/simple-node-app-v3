@@ -3,6 +3,7 @@ const ourForm = document.getElementById('our-form')
 const username = document.getElementById('username-field')
 const password = document.getElementById('password-field')
 
+username.focus()
 
 // display Error message for invalid login
 function loginErrorTemplate() {
@@ -30,6 +31,7 @@ ourForm.addEventListener('submit', e => {
     })
   }
 })
+
 
 // ********** REGISTER SECTION **********
 const regForm = document.querySelector("#registration-form")
