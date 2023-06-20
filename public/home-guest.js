@@ -111,11 +111,13 @@ function usernameImmediately() {
 
 // here 'el' is whatever Element is being passed
 function showValidationError(el, message) {
+  el.classList.add("is-invalid")
   el.nextElementSibling.innerHTML = message
   el.nextElementSibling.classList.add("liveValidateMessage--visible")
   el.errors = true
 }
 function hideValidationError(el) {
+  el.classList.remove("is-invalid")
   el.nextElementSibling.classList.remove("liveValidateMessage--visible")
 }
 
