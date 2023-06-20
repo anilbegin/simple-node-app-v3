@@ -1,13 +1,13 @@
-//LOGIN related variables
+// ********** LOGIN SECTION **********
 const ourForm = document.getElementById('our-form')
 const username = document.getElementById('username-field')
 const password = document.getElementById('password-field')
 
-// LOGIN SECTION
+
 // display Error message for invalid login
 function loginErrorTemplate() {
   if(document.getElementById('error')) document.getElementById('error').remove()
-  return `<span id='error' class="mr-2 text-danger">Invalid username/password</span>`
+  return `<span id='error' class="mr-2 p-1 badge-danger rounded small">invalid username/password</span>`
 }
 
 // login form submit section
@@ -31,7 +31,7 @@ ourForm.addEventListener('submit', e => {
   }
 })
 
-// REGISTER SECTION
+// ********** REGISTER SECTION **********
 const regForm = document.querySelector("#registration-form")
 let allFields = document.querySelectorAll("#registration-form .form-control")
 const regUsername = document.querySelector("#username-register") 
